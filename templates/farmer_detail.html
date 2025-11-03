@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>{{ farmer.name }}’s Plots</h2>
+<p><strong>Address:</strong> {{ farmer.address }}</p>
+<p><strong>Contact:</strong> {{ farmer.contact }}</p>
+
+<a href="{{ url_for('add_plot', farmer_id=farmer.id) }}">➕ Add New Plot</a>
+
+{% if plots %}
+<table border="1" cellpadding="5">
+    <tr>
+        <th>Plot Name</th>
+        <th>Crop</th>
+        <th>Variety</th>
+        <th>Area (ha)</th>
+        <th>Sowing Date</th>
+    </tr>
+    {% for plot in plots %}
+    <tr>
+        <td>{{ plot.plot_name }}</td>
+        <td>{{ plot.crop }}</td>
+        <td>{{ plot.variety }}</td>
+        <td>{{ plot.area }}</td>
+        <td>{{ plot.sowing_date }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<p>No plots added yet.</p>
+{% endif %}
+{% endblock %}

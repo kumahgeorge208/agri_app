@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Plots of {{ farmer['name'] }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Plots of {{ farmer['name'] }}</h1>
+    <a href="{{ url_for('add_plot') }}">Add Plot</a><br><br>
+    {% if plots %}
+        <table border="1" cellpadding="5" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Plot Name</th>
+                    <th>Declared Area</th>
+                    <th>Audited Area</th>
+                    <th>Crop</th>
+                    <th>Variety</th>
+                    <th>Sowing Date</th>
+                    <th>Pineapple Population</th>
+                    <th>Activity Form</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for plot in plots %}
+                <tr>
+                    <td>{{ plot['id'] }}</td>
+                    <td>{{ plot['plot_name'] }}</td>
+                    <td>{{ plot['declared_area'] }}</td>
+                    <td>{{ plot['audited_area'] }}</td>
+                    <td>{{ plot['crop'] }}</td>
+                    <td>{{ plot['variety'] }}</td>
+                    <td>{{ plot['sowing_date'] }}</td>
+                    <td>{{ plot['pineapple_population'] }}</td>
+                    <td><a href="{{ url_for('activity_form', plot_id=plot['id']) }}">Add Activity</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No plots for this farmer yet.</p>
+    {% endif %}
+    <br>
+    <a href="{{ url_for('index') }}">Back to Farmers</a>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Farmers List</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Farmers</h1>
+    <a href="{{ url_for('add_farmer') }}">Add Farmer</a>
+    <br>
+    <a href="{{ url_for('add_plot') }}">Add Plot</a>
+    <br><br>
+
+    {% if farmers %}
+        <table border="1" cellpadding="5" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Contact</th>
+                    <th>Plots</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for farmer in farmers %}
+                <tr>
+                    <td>{{ farmer['id'] }}</td>
+                    <td>{{ farmer['name'] }}</td>
+                    <td>{{ farmer['address'] }}</td>
+                    <td>{{ farmer['contact'] }}</td>
+                    <td><a href="{{ url_for('view_plots', farmer_id=farmer['id']) }}">View Plots</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No farmers yet.</p>
+    {% endif %}
+</body>
+</html>
